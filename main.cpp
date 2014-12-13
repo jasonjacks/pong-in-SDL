@@ -5,27 +5,27 @@
 
 //FUNCTION PROTOTYPES
 bool init ( SDL_Window*  &gWindow,
-	     SDL_Surface* &gScreenSurface); //Starts up SDL and creates window
+	    SDL_Surface* &gScreenSurface); //Starts up SDL and creates window
 
 bool loadMedia ( SDL_Surface* &gPaddle, 
-	          SDL_Surface* &gBlanker, 
-		  SDL_Surface* &gBall ); //Loads media
+	         SDL_Surface* &gBlanker, 
+		 SDL_Surface* &gBall ); //Loads media
 
 int key_poll ( bool &quit ); //Returns integer after polling user input
 
 void game_logic ( SDL_Rect &paddleRect, 
-	           SDL_Rect &ballRect, 
-		   int      &ball_vector_x, 
-		   int      &ball_vector_y, 
-		   int      game_logix); //Updates game state
+	          SDL_Rect &ballRect, 
+		  int      &ball_vector_x, 
+		  int      &ball_vector_y, 
+		  int      game_logix); //Updates game state
 
 void game_view ( SDL_Window*  gWindow, 
-	          SDL_Surface* gScreenSurface, 
-		  SDL_Surface* gPaddle, 
-		  SDL_Surface* gBlanker, 
-		  SDL_Surface* gBall, 
-		  SDL_Rect     paddleRect, 
-		  SDL_Rect     ballRect); //Renders game state
+	         SDL_Surface* gScreenSurface, 
+		 SDL_Surface* gPaddle, 
+		 SDL_Surface* gBlanker, 
+		 SDL_Surface* gBall, 
+		 SDL_Rect     paddleRect, 
+		 SDL_Rect     ballRect); //Renders game state
 
 void close ( SDL_Window*  &gWindow, 
 	      SDL_Surface* &gPaddle); //Frees media and shuts down SDL

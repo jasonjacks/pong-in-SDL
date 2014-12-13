@@ -5,7 +5,7 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
-bool init(SDL_Window  *gWindow, SDL_Surface *gScreenSurface)
+bool init(SDL_Window* &gWindow, SDL_Surface* &gScreenSurface)
 {
 	//Initialization flag
 	bool success = true;

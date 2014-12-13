@@ -35,6 +35,8 @@ int main( int argc, char* args[] )
 	ballRect.y = 50;
 	ballRect.w = 5;
 	ballRect.h = 5;
+	int ball_vector_x = 3;
+	int ball_vector_y = 5;
 	
 	printf("starting...\n");
 

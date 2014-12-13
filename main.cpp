@@ -1,0 +1,89 @@
+#include <SDL.h>
+#include <stdio.h>
+#include <string>
+
+//function prototypes
+bool init(SDL_Window  *gWindow, SDL_Surface *gScreenSurface); //Starts up SDL and creates window
+bool loadMedia(SDL_Surface *gPaddle, SDL_Surface *gBlanker, SDL_Surface *gBall);
+int key_poll(bool &quit);
+void game_logic(SDL_Rect &dstrect, SDL_Rect &ballRect, int ball_vector_x, int ball_vector_y, int game_logix);
+void game_view(SDL_Window  *gWindow, SDL_Surface *gScreenSurface, SDL_Surface *gPaddle, SDL_Surface *gBlanker, SDL_Surface *gBall, SDL_Rect dstrect, SDL_Rect ballRect);
+void close(SDL_Window  *gWindow, SDL_Surface *gPaddle); //Frees media and shuts down SDL
+
+//SDL resources
+SDL_Window* gWindow = NULL; //The window we'll be rendering to
+SDL_Surface* gScreenSurface = NULL; //The surface contained by the window
+SDL_Surface* gPaddle = NULL; //Paddle
+SDL_Surface* gBlanker = NULL; //Blanker
+SDL_Surface* gBall = NULL; //Ball (Square)
+
+int main( int argc, char* args[] )
+{
+	//paddle stationary = 2
+	int game_logix = 2;
+
+	//paddle data - location
+	SDL_Rect dstrect;
+	dstrect.x = 0;
+	dstrect.y = 240;
+	dstrect.w = 15;
+	dstrect.h = 80;
+		
+	//ball data - location and vector
+	SDL_Rect ballRect;
+	ballRect.x = 50;
+	ballRect.y = 50;
+	ballRect.w = 5;
+	ballRect.h = 5;
+	int ball_vector_x = 3;
+	int ball_vector_y = 5;
+	
+	printf("starting...\n");
+
+	//Start up SDL and create window
+	if( !init(gWindow, gScreenSurface) )
+	{
+		printf( "Failed to initialize!\n" );
+		SDL_Delay(5000);
+	}
+	else
+	{
+		printf( "Initialized!\n" );
+
+		//Load media
+		if ( !loadMedia(gPaddle, gBlanker, gBall) )
+		{
+			printf( "Failed to load media!\n" );
+			SDL_Delay(5000);
+		}
+		else
+		{
+			printf( "Loaded media!... Entering Game Loop!\n" );
+			SDL_Delay(2000);
+			
+			//Main loop flag
+			bool quit = false;
+			
+			//GAME LOOP
+			while( !quit )
+			{
+				//Get user input
+				game_logix = key_poll(quit);
+
+				//Update game state - pass paddle location, ball location, ball vector components, paddle signal
+				game_logic(dstrect, ballRect, ball_vector_x, ball_vector_y, game_logix);
+
+				//Draw game world
+				game_view(gWindow,gScreenSurface,gPaddle, gBlanker, gBall, dstrect, ballRect);
+
+				//Delay for keyboard signal stream
+				SDL_Delay( 50 );
+			}
+		}
+	}
+
+	//Free resources and close SDL
+	close(gWindow, gPaddle);
+
+	return 0;
+}

@@ -1,7 +1,7 @@
 #include <SDL.h>
 #include <stdio.h>
 
-bool loadMedia(SDL_Surface* gPaddle, SDL_Surface* gBlanker, SDL_Surface* gBall)
+bool loadMedia(SDL_Surface* &gPaddle, SDL_Surface* &gBlanker, SDL_Surface* &gBall)
 {
     //Loading success flag
     bool success = true;
